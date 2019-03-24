@@ -36,12 +36,22 @@ const opcionesbuscar ={
 const {myData, obtenerNombre, mostrarCursos, obtenerCurso} = require('./cursos');
 
 
+const express = require('express')
+const app = express()
+ 
 let inscribir = (data)=>{
 	texto = "El estudiante "+data.n+" con cedula "+data.x+" se a matriculado en el curso "+obtenerNombre(myData,data.i)+" ";
-	fs.writeFile('inscribir.txt',texto,(err)=>{
+	
+	app.get('/', function (req, res) {
+	  res.send(texto)
+	})
+	 
+	app.listen(3000)
+
+	/*fs.writeFile('inscribir.txt',texto,(err)=>{
 		if(err) throw(err);
 		console.log("se creo el archivo");
-	});
+	});*/
 };
 
 let buscar = (data) =>{
